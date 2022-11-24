@@ -22,8 +22,8 @@ class producto extends Model
         'stock'
     ];
 
-    public function proveedor(){
-        return $this->belongsTo(proveedor::class);
+    public function proveedorrelacionado(){
+        return $this->belongsTo(proveedor::class, 'proveedorrelacionado');
     }
 
     public function detallesventas(){

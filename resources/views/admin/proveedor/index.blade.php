@@ -12,7 +12,7 @@
                     <th>
                     <br>
                     <div>
-                    <button type="button" onclick="location.href = 'register'"class="btn btn-success">+ Agregar Nuevo Proveedor</button>
+                    <button type="button" onclick="location.href = '/admin/proveedor/register'"class="btn btn-success">+ Agregar Nuevo Proveedor</button>
                     </th>
                  </div>   
                 </div>

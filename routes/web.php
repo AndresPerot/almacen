@@ -7,6 +7,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\VentasController;
+use App\Http\Controllers\VenderController;
 
 Route::get('/login', function () {
     return view('login');
@@ -17,25 +19,10 @@ Route::get('/', function () {
     return view('home');
 })->middleware('auth')->name('home');
 
+Route::get('/ventas/index', function () {
+    return view('/ventas/index');
+})->middleware('auth');
 
-Route::get('/sell', function () {
-    return view('sell');
-})->middleware('auth')->name('sell');
-
-Route::get('/mantencion', function () {
-    return view('mantencion');
-})->middleware('auth')->name('mantencion');
-
-
-Route::get('/admin/users/register', function () {
-    return view('/admin/users/register');
-})->middleware('auth.admin')    
-   ->name('register');
-
-Route::get('/admin/proveedor/register', function () {
-    return view('/admin/proveedor/register');
-})->middleware('auth.admin')
-    ->name('register.proveedor');
 
 Route::post('/login', [LoginController::class, 'login']);
 
@@ -75,7 +62,12 @@ Route::get('/admin/users/index', [UserController::class, 'index'])
 ->name('users.index') ;
 
 Route::post('/admin/users/register', [UserController::class, 'create'])
-->middleware('auth.admin');
+->middleware('auth.admin')
+->name('users.create');
+
+Route::get('/admin/users/register', [UserController::class, 'register'])
+->middleware('auth.admin')
+->name('users.register') ;
 
 
 //Rutas de creacion de Proveedores
@@ -102,6 +94,10 @@ Route::post('/admin/proveedor/register', [ProveedorController::class, 'create'])
 ->middleware('auth.admin')
 ->name('proveedores.create');
 
+Route::get('/admin/proveedor/register', [ProveedorController::class, 'register'])
+->middleware('auth.admin')
+->name('proveedores.register') ;
+
 Route::delete('/admin/proveedor/edit/{id}', [ProveedorController::class, 'desactivar'])
 ->middleware('auth.admin')
 ->name('proveedores.desactivar') ;
@@ -110,13 +106,14 @@ Route::post('/admin/proveedor/edit/{id}', [ProveedorController::class, 'activar'
 ->middleware('auth.admin')
 ->name('proveedores.activar') ;
 
-//Rutas de creacion de Productos
+//Rutas de creacion de Productos Administrador
 
 Route::resource('productos', ProductoController::class);
 
 Route::get('/admin/producto/show/{id}/{id_proveedores}', [ProductoController::class, 'show'])
 ->middleware('auth.admin')
 ->name('productos.show') ;
+
 
 Route::put('/admin/producto/show/{id}', [ProductoController::class, 'update'])
 ->middleware('auth.admin')
@@ -126,7 +123,7 @@ Route::get('/admin/producto/edit/{id}', [ProductoController::class, 'edit'])
 ->middleware('auth.admin')
 ->name('productos.edit') ;
 
-Route::get('/admin/producto/index', [ProductoController::class, 'index'])
+Route::get('/admin/producto/index/', [ProductoController::class, 'index'])
 ->middleware('auth.admin')
 ->name('productos.index') ;
 
@@ -147,5 +144,55 @@ Route::post('/admin/producto/edit/{id}', [ProductoController::class, 'activar'])
 ->middleware('auth.admin')
 ->name('productos.activar') ;
 
+//Rutas de creacion de Productos Usuario
 
+
+Route::get('/producto/show/{id}/{id_proveedores}', [ProductoController::class, 'showUsuario'])
+->middleware('auth')
+->name('productos.showUsuario') ;
+
+Route::put('/producto/show/{id}', [ProductoController::class, 'updateUsuario'])
+->middleware('auth')
+->name('productos.updateUsuario') ;
+
+Route::get('/producto/edit/{id}', [ProductoController::class, 'editUsuario'])
+->middleware('auth')
+->name('productos.editUsuario') ;
+
+Route::get('/producto/register', [ProductoController::class, 'registerUsuario'])
+->middleware('auth')
+->name('productos.registerUsuario') ;
+
+Route::post('/producto/register', [ProductoController::class, 'createUsuario'])
+->middleware('auth')
+->name('productos.createUsuario');
+
+Route::get('/producto/index', [ProductoController::class, 'indexUsuario'])
+->middleware('auth')
+->name('productos.indexUsuario') ;
+
+
+
+//Ruta Ventas
+
+Route::resource('ventas', VentasController::class);
+
+
+//Rutas Para Vender
+
+Route::post("/productoDeVenta", [VenderController::class, 'agregarProductoVenta'])
+->middleware('auth')
+->name("agregarProductoVenta");
+
+Route::delete("/productoDeVenta", [VenderController::class, 'quitarProductoDeVenta'])
+->middleware('auth')
+->name("quitarProductoDeVenta");
+
+Route::post("/terminarOCancelarVenta", [VenderController::class, 'terminarOCancelarVenta'])
+->middleware('auth')
+->name("terminarOCancelarVenta");
+
+Route::get('/vender/vender', [VenderController::class, 'index'])
+->middleware('auth')
+->name("vender.index");
 

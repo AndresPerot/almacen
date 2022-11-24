@@ -4,19 +4,19 @@
     <body >
         @include('partials/navbar')
      
-        <div class="container p-4">
-                 <div class="card border-info">
-                    <h1>Sala Ventas</h1>
+            <div class="container p-4">
+                 <div>
+                    <h1>Bienvenidos</h1>
                  </div>               
             </div>
             <div class="container p-4">
-                 <div class="card border-info">
-                 <a href="{{ url('/sell') }}" class="navbar-brand">Ventas</a>
+                 <div class=>
+                 <a href="{{ url('/vender/vender') }}" class="navbar-brand">Sala Ventas</a>
                  </div>               
             </div>
             <div class="container p-4">
-                 <div class="card border-info">
-                 <a href="{{ url('/sell') }}" class="navbar-brand">Informe Uso Diario</a>
+                 <div>
+                 <a href="{{ url('producto/index') }}" class="navbar-brand">Mantencion Productos</a>
                  </div>               
             </div>
         </div> 

@@ -15,15 +15,16 @@ class CreateDetalleventasTable extends Migration
     {
         Schema::create('detalleventas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('productos_id')->nullable();
+            $table->unsignedBigInteger('id_venta');
+            $table->string('descripcion');
+            $table->string('codbarra');
             $table->integer('cantidad');
             $table->integer('precio');
-            $table->integer('subtotal');
             $table->timestamp('created_at');
             $table->timestamp('updated_at');
             $table->timestamp('deleted_at')->nullable(true);
 
-            $table->foreign('productos_id')->references('id')->on('productos')->onDelete('set null');
+            $table->foreign('id_venta')->references('id')->on('ventas');
         });
     }
 

@@ -16,6 +16,12 @@ class ProveedorController extends Controller
         return redirect()->intended('/admin/proveedor/index');
     }
 
+    public function register(){
+
+        return view(('admin/proveedor/register'));  
+
+    }
+
     public function index(){
         $proveedores = \DB::table('proveedores')->get();
         return view(('admin/proveedor/index'), compact('proveedores'));   

@@ -18,6 +18,12 @@ class UserController extends Controller
         return redirect()->intended('/admin/users/index');
     }
 
+    public function register(){
+
+        return view(('admin/users/register'));  
+
+    }
+
     public function index(){
         $users = \DB::table('users')->get();
         return view(('admin/users/index'), compact('users'));   

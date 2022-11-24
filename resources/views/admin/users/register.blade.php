@@ -4,7 +4,7 @@
     <body>
         @include('partials/navbaradmin')
          <div class="container p-4">
-            <form action="register" method="POST">
+            <form action="/admin/users/register" method="POST">
                 @csrf 
                 <div class="form-group">
                     <label for="name">Nombre :</label>

@@ -17,7 +17,7 @@
                 </div>
                 <button 
                    class ="btn btn-info"
-                   >Actualizar Usuario
+                   >Actualizar Proveedor
                  </button>
             </form>
         </div>
